@@ -1,0 +1,30 @@
+# NEURONA training config for BOLD5000-QA
+
+# --- Data ---
+data_dir: data/BOLD5000-QA
+dataset: BOLD5000
+subject: CSI1
+
+# --- Training ---
+epochs: 100
+batch_size: 32
+seed: 42
+train_hop: all          # all, zs (zero-shot), 1, 2, or 3
+
+# --- Brain Atlas ---
+atlas: yeo17            # yeo7, yeo17, difumo1024, whole
+
+# --- Grounding ---
+ground_attr_region: true
+ground_attr_relation: true
+ground_rel_region: true
+ground_rel_relation: true
+ground_rel_guided_relation: guide-all   # guide-all, guide-subject, guide-object, guide-off
+
+# --- Output ---
+output_dir: output
+
+# --- Optional ---
+# plot_example_images: false
+# removed_regions: null
+# selected_regions: null

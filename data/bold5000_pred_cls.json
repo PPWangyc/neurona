@@ -1,0 +1,39 @@
+{
+    "Movement": [
+        "climb",
+        "play",
+        "eat",
+        "fly",
+        "grow",
+        "hold",
+        "ride",
+        "sit",
+        "use",
+        "walk",
+        "work",
+        "resting",
+        "wear"
+    ],
+    "Position":
+    [
+        "under",
+        "_in",
+        "surround",
+        "in_front_of",
+        "beside",
+        "on",
+        "under",
+        "attached_to",
+        "next_to"
+    ],
+    "Thing":
+    [
+        "has",
+        "_is"
+    ],
+    "YesNo":
+    [
+        "yes",
+        "no"
+    ]
+}

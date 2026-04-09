@@ -1,0 +1,17 @@
+# Third Party Libraries
+[submodule "third_party/Concepts"]
+	path = third_party/Concepts
+	url = git@github.com:concepts-ai/Concepts.git
+[submodule "third_party/Jacinle"]
+	path = third_party/Jacinle
+	url = git@github.com:vacancy/Jacinle.git
+
+# Algonauts 2025 Competitors Dataset: Raw dataset from the competition, CNeuroMod-QA dataset is derived from this dataset
+[submodule "data/algonauts_2025.competitors"]
+	path = data/algonauts_2025.competitors
+	url = git@github.com:courtois-neuromod/algonauts_2025.competitors.git
+
+# WAVE-BOLD5000 Dataset: This is the base dataset for creating the BOLD5000-QA dataset
+[submodule "data/WAVE-BOLD5000"]
+	path = data/WAVE-BOLD5000
+	url = git@hf.co:datasets/PPWangyc/WAVE-BOLD5000

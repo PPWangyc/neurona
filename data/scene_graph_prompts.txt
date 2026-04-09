@@ -1,0 +1,76 @@
+Task: Given an image and its label, generate a scene graph and corresponding negative samples to support queries about objects, descriptors, and relations. Use predefined action and position relation sets to define relationships.
+
+Scene Graph Rules:
+
+Objects: List each unique object explicitly mentioned in the image description or label (e.g., from "A woman is playing the pink piano in the room," include woman, piano, room). Optionally, include additional plausible objects typical in the scene (e.g., floor, chair) to enhance direct relations, up to a minimum of 5 objects.
+Descriptors: Include adjectives or nouns explicitly tied to an object (e.g., "pink piano" → pink). Generate at least 3 descriptors.
+Relations:
+Include all directly stated relationships from the description (e.g., "playing," "in") and additional plausible direct relations based on typical scene context.
+Use predicates exclusively from the following sets:
+Action Relation Set: ["climb", "play", "eat", "fly", "grow", "hold", "ride", "sit", "stop", "use", "walk", "work", "resting"]
+Position Relation Set: ["under", "in", "surround", "in_front_of", "beside", "on", "under", "attached_to", "next_to"]
+Each relation between a subject-object pair must be unique (e.g., no duplicate predicates for the same subject-object pair).
+Aim for at least 2 relations to enable diverse vocab queries (e.g., "What is the action/position between [subject] and [object]?").
+No Redundancy: Each object, descriptor, and relation must be unique within the scene graph.
+Make sure the object, descriptor, and relation is clearly showed on the image. Do not output scene graph contain unsure concepts (e.g., avoid objects, descriptors, or relations that are ambiguous, implied indirectly, or lack clear support from the image description, label, or typical scene context).
+Negative Sample Rules:
+
+For each positive scene graph component:
+Objects: Replace with a plausible but incorrect object not in the image/label (e.g., "piano" → "guitar").
+Descriptors: Alter the adjective or object to a plausible but incorrect variant (e.g., "pink piano" → "blue guitar").
+Relations: Keep the predicate (relation) the same as in the positive scene graph but replace either the subject or object or both with a plausible alternative not in the image/label (e.g., "woman play piano" → "man play piano").
+Negatives must be contextually similar (e.g., same category or typical location) and not present in the image/label.
+Match the positive scene graph’s structure (e.g., 5 objects, 3 descriptors, 4+ relations).
+Output Format:
+
+Scene Graph:
+<object>[object name]</object> (e.g., <object>woman</object>)
+<descriptor><adjective>[adjective]</adjective><subject>[object]</subject></descriptor> (e.g., <descriptor><adjective>pink</adjective><subject>piano</subject>)
+<relation><subject>[subject]</subject><predicate>[predicate]</predicate><object>[object]</object></relation> (e.g., <relation><subject>woman</subject><predicate>play</predicate><object>piano</object>)
+Negative Samples: Same structure with altered elements as per rules.
+Key Requirements:
+
+Generate at least 3 objects, 2 descriptors, and 1 relations for both positive and negative scene graphs.
+Relations must use predicates from the action or position sets, and each subject-object pair must have a unique relation.
+Negative relations retain the same predicate but swap either the subject or object (e.g., "woman play piano" → "man play piano" or "woman play guitar").
+Avoid nonsensical replacements (e.g., "room" → "volcano").
+Support queries:
+Positive queries (e.g., "Is there a woman?") and negative queries (e.g., "Is there a bear?") align with objects.
+Vocab relation queries (e.g., "What is the action/position between [subject] and [object]?") align with relations.
+Example Application
+Image: "A woman is playing the pink piano in the room."
+
+Label: "Woman, Piano"
+
+Positive Scene Graph
+<object>woman</object>
+<object>piano</object>
+<object>room</object>
+<object>floor</object>
+<object>stool</object>
+<descriptor><adjective>pink</adjective><subject>piano</subject>
+<descriptor><adjective>small</adjective><subject>stool</subject>
+<descriptor><adjective>wooden</adjective><subject>floor</subject>
+<relation><subject>woman</subject><predicate>play</predicate><object>piano</object>
+<relation><subject>piano</subject><predicate>in</predicate><object>room</object>
+<relation><subject>woman</subject><predicate>sit</predicate><object>stool</object>
+<relation><subject>stool</subject><predicate>on</predicate><object>floor</object>
+<relation><subject>piano</subject><predicate>beside</predicate><object>stool</object>
+
+Negative Samples
+<object>bear</object>
+<object>guitar</object>
+<object>kitchen</object>
+<object>carpet</object>
+<object>bed</object>
+<descriptor><adjective>blue</adjective><subject>guitar</subject>
+<descriptor><adjective>large</adjective><subject>bed</subject>
+<descriptor><adjective>soft</adjective><subject>carpet</subject>
+<relation><subject>bear</subject><predicate>play</predicate><object>piano</object>
+<relation><subject>guitar</subject><predicate>in</predicate><object>room</object>
+<relation><subject>man</subject><predicate>sit</predicate><object>piano</object>
+<relation><subject>bed</subject><predicate>on</predicate><object>carpet</object>
+<relation><subject>guitar</subject><predicate>beside</predicate><object>bed</object>
+
+Now please generate the scene graphs of this image, and its label. First generate Positive Scene Graph, and then Negative Samples.
+Image Label: 

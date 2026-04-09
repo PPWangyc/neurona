@@ -1,0 +1,17 @@
+*.tar
+*.png
+*.jpg
+!asset/*.png
+!asset/*.jpg
+data
+*.egg-info
+__pycache__
+*.out
+*.pth
+output
+shikra-7b
+mm_projector.bin
+
+paper/
+poster/
+*.txt
